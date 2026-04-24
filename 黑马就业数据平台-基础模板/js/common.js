@@ -9,3 +9,23 @@ const showToast = msg => {
     document.querySelector('.toast-body').innerHTML = msg
 }
 showToast('成功')
+
+// 3.公共的token是否存在验证
+const checkToken = () => {
+    const { token } = JSON.parse(localStorage.getItem('userMsg'))
+    console.log(token)
+    if (!token) {
+        showToast('请先登录')
+        setTimeout(() => {
+            location.href = './login.html'
+        }, 1500)
+    }
+}
+
+// 4.回显用户名
+const renderUserName = () => {
+    const data = localStorage.getItem('userMsg') ? localStorage.getItem('userMsg') : {}
+    const { username } = JSON.parse(data)
+    console.log(username)
+    if (username) document.querySelector('.username').innerHTML = username
+}

@@ -12,7 +12,8 @@ document.querySelector('#btn-login').addEventListener('click', async e => {
         const res = await axios.post('/login', data)
         console.log(res)
         const obj = {}
-        obj.usernam = res.data.data.username
+        obj.username = res.data.data.username
+        obj.token = res.data.data.token
         // 4.如果成功,则本地存储用户名
         localStorage.setItem('userMsg', JSON.stringify(obj))
         showToast(res.data.message)

@@ -29,3 +29,14 @@ const renderUserName = () => {
     console.log(username)
     if (username) document.querySelector('.username').innerHTML = username
 }
+
+// 5.退出登录
+const logout = () => {
+    document.querySelector('#logout').addEventListener('click', e => {
+        localStorage.removeItem('userMsg')
+        showToast('退出登录成功')
+        setTimeout(() => {
+            location.href = './login.html'
+        }, 1500)
+    })
+}

@@ -9,20 +9,9 @@ const getData = async () => {
         const res = await axios({
             url: "/dashboard",
             method: "GET",
-            // headers: {
-            //     Authorization: token
-            // }
         })
-        renderOverview(res.data.data.overview)
+        renderOverview(res.data.overview)
     } catch (err) {
-        // console.dir(err)
-        // if (err.response.status === 401) {
-        //     showToast('登录过期，请重新登录')
-        //     localStorage.removeItem('userMsg')
-        //     setTimeout(() => {
-        //         location.href = './login.html'
-        //     }, 1500)
-        // }
     }
 }
 getData()

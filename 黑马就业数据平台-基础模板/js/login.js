@@ -12,12 +12,12 @@ document.querySelector('#btn-login').addEventListener('click', async e => {
         const res = await axios.post('/login', data)
         console.log(res)
         const obj = {}
-        obj.username = res.data.data.username
-        obj.token = res.data.data.token
+        obj.username = res.data.username
+        obj.token = res.data.token
         // 4.如果成功,则本地存储用户名
         localStorage.setItem('userMsg', JSON.stringify(obj))
         console.log(localStorage.getItem('userMsg'))
-        showToast(res.data.message)
+        showToast(res.message)
         // 5.跳转页面
         setTimeout(() => {
             location.href = './index.html'

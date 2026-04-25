@@ -12,7 +12,7 @@ document.querySelector('#btn-register').addEventListener('click', async e => {
     console.log(res)
 
     // NOTE 1.3 显示结果
-    showToast(res.data.message)
+    showToast(res.message)
 
     // NOTE 1.4 跳转至登录页
     setTimeout(() => {

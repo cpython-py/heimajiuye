@@ -50,7 +50,7 @@ axios.interceptors.request.use(config => {
 
 // 7.响应拦截器
 axios.interceptors.response.use(response => {
-    return response
+    return response.data
 }, error => {
 
     if (error.response.status === 401) {

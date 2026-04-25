@@ -8,12 +8,11 @@ const showToast = msg => {
     toastObj.show()
     document.querySelector('.toast-body').innerHTML = msg
 }
-showToast('成功')
-
+const data = localStorage.getItem('userMsg') ? JSON.parse(localStorage.getItem('userMsg')) : {}
 // 3.公共的token是否存在验证
 const checkToken = () => {
-    const { token } = JSON.parse(localStorage.getItem('userMsg'))
-    console.log(token)
+    const { token } = data
+    // console.log(token)
     if (!token) {
         showToast('请先登录')
         setTimeout(() => {
@@ -24,9 +23,8 @@ const checkToken = () => {
 
 // 4.回显用户名
 const renderUserName = () => {
-    const data = localStorage.getItem('userMsg') ? localStorage.getItem('userMsg') : {}
-    const { username } = JSON.parse(data)
-    console.log(username)
+    const { username } = data
+    // console.log(username)
     if (username) document.querySelector('.username').innerHTML = username
 }
 
@@ -40,3 +38,28 @@ const logout = () => {
         }, 1500)
     })
 }
+
+// 6.请求拦截器
+axios.interceptors.request.use(config => {
+    const { token } = data
+    if (token) config.headers['Authorization'] = token
+    return config
+}, error => {
+    return Promise.reject(error)
+})
+
+// 7.响应拦截器
+axios.interceptors.response.use(response => {
+    return response
+}, error => {
+
+    if (error.response.status === 401) {
+        showToast('登录过期，请重新登录')
+        localStorage.removeItem('userMsg')
+        setTimeout(() => {
+            location.href = './login.html'
+        }, 1500)
+
+    }
+    return Promise.reject(error)
+})

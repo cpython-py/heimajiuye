@@ -16,6 +16,7 @@ document.querySelector('#btn-login').addEventListener('click', async e => {
         obj.token = res.data.data.token
         // 4.如果成功,则本地存储用户名
         localStorage.setItem('userMsg', JSON.stringify(obj))
+        console.log(localStorage.getItem('userMsg'))
         showToast(res.data.message)
         // 5.跳转页面
         setTimeout(() => {

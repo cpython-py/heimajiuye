@@ -12,7 +12,7 @@ const render = async () => {
                 <td>${name}</td>
                 <td>${age}</td>
                 <td>${gender?'女':'男'}</td>
-                <td>${group}</td>
+                <td>第${group}组</td>
                 <td>${hope_salary}</td>
                 <td>${salary}</td>
                 <td>${province}${city}${area}</td>
@@ -23,5 +23,13 @@ const render = async () => {
             </tr>
         `
     }).join('')
+    document.querySelector('.total').innerHTML = data.length
 }
 render()
+
+// NOTE - 新增学生
+const modalDom = document.querySelector('#modal')
+const myModal = new bootstrap.Modal(modalDom)
+document.querySelector('#openModal').addEventListener('click', e => {
+    myModal.show()
+})
